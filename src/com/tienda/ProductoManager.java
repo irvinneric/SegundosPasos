@@ -29,23 +29,31 @@ public class ProductoManager {
             return;
         }
 
-        mostrarProductos();//mostramos los productos
-        int codigoProducto = inputManager.leerInt("Ingresa el código del producto para eliminarlo. ");
+        mostrarProductos();//Se muestran arrayList de los productos
+        int codigoProdcuto = inputManager.leerInt("Ingresa el código del producto para eliminarlo.");//Se recibe el codigo del producto
 
-        boolean productoEncontrado = false;
+        Producto productoAEliminar = null;
 
-        for (int i = 0; i < arrayListaproductos.size(); i++) {
-            Producto producto = arrayListaproductos.get(i);
-            if (producto.getCodigoProducto() == codigoProducto) {
-                arrayListaproductos.remove(i);
-                System.out.println("Producto eliminado correctamente.");
+        for (Producto producto : arrayListaproductos) {
+            if (producto.getCodigoProducto() == codigoProdcuto) {
+                productoAEliminar = producto;
                 break;
             }
         }
 
-        if (!productoEncontrado) {
-            System.out.println("Producto no encontrado.");
+        if (productoAEliminar != null) {
+            System.out.println("Estás se guro que quieres eliminar el producto s/n?");
+            String confirmacion = entrada.nextLine();
+            if (confirmacion.equalsIgnoreCase("s")) {
+                arrayListaproductos.remove(productoAEliminar);
+                System.out.println("Producto eliminado correctamente.");
+            } else {
+                System.out.println("Operacion cancelada");
+            }
+        } else {
+            System.out.println("Producto no encontrado");
         }
+
 
     }
 
