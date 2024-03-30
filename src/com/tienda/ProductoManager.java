@@ -78,14 +78,22 @@ public class ProductoManager {
         int codigoProducto = inputManager.leerInt("Ingresa el código del producto para cambiar el stock. ");
 
         for (Producto producto : arrayListaproductos) {
+            if(producto.getCodigoProducto() == codigoProducto){
+                System.out.println("Producto actual: " + producto.getNombreProducto() + ". Stock actual: " + producto.getCantidadProducto());
+                int nuevaCantidad = inputManager.leerInt("Confirma la nueva cantida: ");
+                System.out.println("¿Estás seguro de que quieres cambiar el stock a " + nuevaCantidad + "? (s/n): ");
+                String confirmacion = entrada.nextLine();
 
-            if (producto.getCodigoProducto() == codigoProducto) {
-                int nuevaCantidad = inputManager.leerInt("Ingresa ls nueva cantidad: " + "Nombre " + producto.getNombreProducto() + "(" + producto.getCantidadProducto() + ")");
-                producto.setCantidadProducto(nuevaCantidad);
-                System.out.println("Stock modificado exitosamente");
+                if(confirmacion.equalsIgnoreCase("s")){
+                    producto.setCantidadProducto(nuevaCantidad);
+                    System.out.println("Stock modificado correctamente");
+                }else {
+                    System.out.println("Operación cancelada");
+                }
                 return;
             }
         }
+        System.out.println("Producto no encontrado");
     }
 
     public void modificarNombre() {
